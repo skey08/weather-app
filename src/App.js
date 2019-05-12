@@ -23,12 +23,15 @@ export default class App extends Component {
     const data = await api_call.json();
     if (city && country) {
       console.log(data);
+      let conditions = data.weather.map((condition) => {
+        return <li>{condition.description}</li>
+      })
       this.setState({
         temperature: data.main.temp,
         city: data.name,
         country: data.sys.country,
         humidity: data.main.humidity,
-        description: data.weather[0].description,
+        description: conditions,
         error: ""
       })
     } else {
